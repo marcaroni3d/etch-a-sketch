@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Etch-A-Sketch</title>
+</head>
+
+<body>
+    <header>
+        <h1>Etch-A-Sketch</h1>
+    </header>
+
+    <main>
+        <div class="controls">
+            <input id="colorPicker" type="color" value="#333333">
+            <button id="colorBtn">Color Mode</button>
+            <button id="rainbowBtn">Rainbow Mode</button>
+            <button id="eraserBtn">Eraser</button>
+            <div>Grid size: <span id="sizeValue"></span></div>
+            <input id="sizeSlider" type="range" value="16" min="1" max="64">
+            <button id="resetBtn">Reset</button>
+        </div>
+        
+        <div id="grid" class="grid"></div>
+        
+    </main>
+    
+    <footer>
+        <p>Created by Marcaroni3d</p>
+    </footer>
+
+   <script src="script.js"></script>
+
+</body>
+</html>
