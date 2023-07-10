@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    --off-white: #fefefe;
+}
+
+body {
+    margin: 10px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    flex: 1;
+    display: table;
+}
+
+.cell {
+    width: 10px;
+    height: 10px;
+    border: .5px solid black;
+
+}
+
+
+footer {
+    background: rgba(256, 256, 256, 1);
+    padding: 5px 0 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.github-img {
+    height: 20px;
+    margin-left: 10px;
+}
