@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-content">
+    <header>
+        <h1>Etch-A-Sketch</h1>
+    </header>
+
+    <div class="main">
         <div id="user-interface">
-            <div class="controls">
-                <label for="size-slider">Grid Size: <span class="grid-size-display">32 x 32</span></label>
-                <input type="range" id="size-slider" min="8" max="64">
-            </div>
+            <input id="color-input" type="color" value="">
+            <button id="color-btn">Color Mode</button>
+            <button id="rainbow-btn">Rainbow Mode</button>
+            <button id="eraser-btn">Eraser</button>
+            <div>Grid Size: <span class="size-value"></span></div>
+            <input type="range" id="size-input" value="16" min="8" max="64">
+            <button id="reset-btn">Reset</button>
         </div>
     
         <div id="grid-container"></div>

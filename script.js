@@ -1,26 +1,59 @@
-const defaultSize = 32
+/* DEFAULTS */
+const defaultSize = 16
+const defaultColor = '#333333'
+const defaultMode = 'color'
 
 let currentSize = defaultSize
+let currentColor = defaultColor
+let currentMode = defaultMode
 
 function setCurrentSize(newSize) {
     currentSize = newSize
 }
+function setCurrentColor(newColor) {
+    currentColor = newColor
+}
+function setCurrentMode(newMode) {
+    activateButton(newMode)
+    currentMode = newMode
+}
 
+/* USER INTERFACE */
 const gridContainer = document.querySelector('#grid-container')
-const sizeSlider = document.querySelector('#size-slider')
+const colorInput = document.querySelector('#color-input')
+const colorBtn = document.querySelector('#color-btn')
+const rainbowBtn = document.querySelector('#rainbow-btn')
+const eraserBtn = document.querySelector('#eraser-btn')
+const sizeInput = document.querySelector('#size-input')
+const resetBtn = document.querySelector('#reset-btn')
 
-sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
-sizeSlider.onchange = (e) => changeSize(e.target.value)
+colorInput.oninput = (e) => setCurrentColor(e.target.value)
+colorBtn.onclick = () => setCurrentMode('color')
+rainbowBtn.onclick = () => setCurrentMode('rainbow')
+eraserBtn.onclick = () => setCurrentMode('eraser')
+sizeInput.onchange = (e) => changeSize(e.target.value)
+sizeInput.onmousemove = (e) => updateSizeValue(e.target.value)
+resetBtn.onclick = () => {
+    currentSize = defaultSize
+    updateSizeValue(currentSize)
+    reloadGrid()
+}
 
+/* FUNCTIONS */
 function changeSize(value) {
     setCurrentSize(value)
     updateSizeValue(value)
     reloadGrid()
 }
 
-function updateSizeValue(value) {
-    let gridSizeDisplay = document.querySelector('.grid-size-display')
-    gridSizeDisplay.innerHTML = `${value}` + ' x ' + `${value}`
+function updateSizeValue(newValue) {
+    let gridSizeDisplay = document.querySelector('.size-value')
+    sizeInput.value = newValue
+    gridSizeDisplay.innerHTML = `${newValue}` + ' x ' + `${newValue}`
+}
+
+function updateColorValue(newValue) {
+    colorInput.value = newValue
 }
 
 function reloadGrid() {
@@ -33,16 +66,53 @@ function clearGrid() {
 }
 
 function createGrid(size) {
-    for (let i = 0; i < size; i++) {
-        let row = document.createElement('div')
-        row.className = 'row'
-        for (let x = 0; x < size; x++) {
-            let cell = document.createElement('div')
-            cell.className = 'cell'
-            row.appendChild(cell)
-        }
-        gridContainer.appendChild(row)
+    gridContainer.style.setProperty("--columns-rows", size)
+    for (let i = 0; i < size * size; i++) {
+        let cell = document.createElement('div')
+        cell.className = 'cell'
+        cell.addEventListener('mouseover', changeColor)
+        gridContainer.appendChild(cell)
     }
 }
 
-createGrid(currentSize)
+function changeColor(e) {
+    if (currentMode === 'color') {
+        e.target.style.backgroundColor = currentColor
+    }
+    if (currentMode === 'rainbow') {
+        const randomR = Math.floor(Math.random() * 256)
+        const randomG = Math.floor(Math.random() * 256)
+        const randomB = Math.floor(Math.random() * 256)
+        const randomColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+        e.target.style.backgroundColor = randomColor
+    }
+    if (currentMode === 'eraser') {
+        e.target.style.backgroundColor = '#fefefe'
+    }
+}
+
+function activateButton(newMode) {
+    if (currentMode === 'color') {
+        colorBtn.classList.remove('active')
+    } else if (currentMode === 'rainbow') {
+        rainbowBtn.classList.remove('active')
+    } else if (currentMode === 'eraser') {
+        eraserBtn.classList.remove('active')
+    }
+
+    if (newMode === 'color') {
+        colorBtn.classList.add('active')
+    } else if (newMode === 'rainbow') {
+        rainbowBtn.classList.add('active')
+    } else if (newMode === 'eraser') {
+        eraserBtn.classList.add('active')
+    }
+}
+
+/* INIT */
+window.onload = () => {
+    createGrid(defaultSize)
+    setCurrentMode(defaultMode)
+    updateSizeValue(defaultSize)
+    updateColorValue(defaultColor)
+}
