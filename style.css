@@ -16,7 +16,7 @@ body {
 header {
     text-align: center;
     font-size: 24px;
-    padding: 10px 0 30px 0;
+    margin: 10px 0 30px 0;
 }
 
 .main {
@@ -49,6 +49,9 @@ button {
     padding: 10px 20px;
     border: 1px solid var(--primary-dark);
     border-radius: 5px;
+}
+#color-btn, #eraser-btn {
+    margin-bottom: 30px;
 }
 
 .active {

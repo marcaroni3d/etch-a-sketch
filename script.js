@@ -19,16 +19,20 @@ function setCurrentMode(newMode) {
 }
 
 /* USER INTERFACE */
-const gridContainer = document.querySelector('#grid-container')
-const colorInput = document.querySelector('#color-input')
-const colorBtn = document.querySelector('#color-btn')
-const rainbowBtn = document.querySelector('#rainbow-btn')
-const eraserBtn = document.querySelector('#eraser-btn')
-const sizeInput = document.querySelector('#size-input')
-const resetBtn = document.querySelector('#reset-btn')
+const gridContainer = document.getElementById('grid-container')
+const colorInput = document.getElementById('color-input')
+const colorBtn = document.getElementById('color-btn')
+const warmBtn = document.getElementById('warm-btn')
+const coldBtn = document.getElementById('cold-btn')
+const rainbowBtn = document.getElementById('rainbow-btn')
+const eraserBtn = document.getElementById('eraser-btn')
+const sizeInput = document.getElementById('size-input')
+const resetBtn = document.getElementById('reset-btn')
 
 colorInput.oninput = (e) => setCurrentColor(e.target.value)
 colorBtn.onclick = () => setCurrentMode('color')
+warmBtn.onclick = () => setCurrentMode('warm')
+coldBtn.onclick = () => setCurrentMode('cold')
 rainbowBtn.onclick = () => setCurrentMode('rainbow')
 eraserBtn.onclick = () => setCurrentMode('eraser')
 sizeInput.onchange = (e) => changeSize(e.target.value)
@@ -79,6 +83,16 @@ function changeColor(e) {
     if (currentMode === 'color') {
         e.target.style.backgroundColor = currentColor
     }
+    if (currentMode === 'warm') {
+        const colors = ['#BF6A6D', '#A45256', '#EC6760', '#F88C5D', '#FDCF6D']
+        const randomWarm = colors[Math.floor(Math.random() * colors.length)]
+        e.target.style.backgroundColor = randomWarm
+    }
+    if (currentMode === 'cold') {
+        const colors = ['#5590BC', '#0DABB8', '#01F0F6', '#1FFDE1', '#57FFC8']
+        const randomCold = colors[Math.floor(Math.random() * colors.length)]
+        e.target.style.backgroundColor = randomCold
+    }
     if (currentMode === 'rainbow') {
         const randomR = Math.floor(Math.random() * 256)
         const randomG = Math.floor(Math.random() * 256)
@@ -94,6 +108,10 @@ function changeColor(e) {
 function activateButton(newMode) {
     if (currentMode === 'color') {
         colorBtn.classList.remove('active')
+    } else if (currentMode === 'warm') {
+        warmBtn.classList.remove('active')
+    } else if (currentMode === 'cold') {
+        coldBtn.classList.remove('active')
     } else if (currentMode === 'rainbow') {
         rainbowBtn.classList.remove('active')
     } else if (currentMode === 'eraser') {
@@ -102,6 +120,10 @@ function activateButton(newMode) {
 
     if (newMode === 'color') {
         colorBtn.classList.add('active')
+    } else if (newMode === 'warm') {
+        warmBtn.classList.add('active')
+    } else if (newMode === 'cold') {
+        coldBtn.classList.add('active')
     } else if (newMode === 'rainbow') {
         rainbowBtn.classList.add('active')
     } else if (newMode === 'eraser') {
