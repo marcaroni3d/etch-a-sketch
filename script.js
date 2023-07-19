@@ -6,6 +6,7 @@ const defaultMode = 'color'
 let currentSize = defaultSize
 let currentColor = defaultColor
 let currentMode = defaultMode
+let sketchMode = true
 
 function setCurrentSize(newSize) {
     currentSize = newSize
@@ -42,8 +43,14 @@ resetBtn.onclick = () => {
     updateSizeValue(currentSize)
     reloadGrid()
 }
+window.onclick = () => toggleSketch()
 
 /* FUNCTIONS */
+function toggleSketch() {
+    sketchMode = !sketchMode
+    console.log(sketchMode)
+}
+
 function changeSize(value) {
     setCurrentSize(value)
     updateSizeValue(value)
@@ -80,6 +87,9 @@ function createGrid(size) {
 }
 
 function changeColor(e) {
+    if (sketchMode === false) {
+        return
+    }
     if (currentMode === 'color') {
         e.target.style.backgroundColor = currentColor
     }
