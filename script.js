@@ -44,10 +44,11 @@ resetBtn.onclick = () => {
     updateSizeValue(currentSize)
     reloadGrid()
 }
-window.onclick = () => toggleSketch()
+window.onclick = (e) => toggleSketch(e)
 
 /* FUNCTIONS */
-function toggleSketch() {
+function toggleSketch(e) {
+    if (e.target.parentElement.id === 'user-interface') return
     sketchMode = !sketchMode
     updateSketchModeDisplay()
 }
