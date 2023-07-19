@@ -47,6 +47,14 @@ header>p {
     justify-content: space-evenly;
     align-items: center;
     gap: 10px;
+    height: 100%;
+}
+#user-interface>p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+#sketch-mode {
+    font-weight:bold;
 }
 
 button, input {

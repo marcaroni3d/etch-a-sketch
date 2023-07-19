@@ -21,6 +21,7 @@ function setCurrentMode(newMode) {
 
 /* USER INTERFACE */
 const gridContainer = document.getElementById('grid-container')
+const sketchModeDisplay = document.getElementById('sketch-mode')
 const colorInput = document.getElementById('color-input')
 const colorBtn = document.getElementById('color-btn')
 const warmBtn = document.getElementById('warm-btn')
@@ -48,7 +49,15 @@ window.onclick = () => toggleSketch()
 /* FUNCTIONS */
 function toggleSketch() {
     sketchMode = !sketchMode
-    console.log(sketchMode)
+    updateSketchModeDisplay()
+}
+function updateSketchModeDisplay() {
+    if (sketchMode) {
+        sketchModeDisplay.innerText = 'On'
+    }
+    if (!sketchMode) {
+        sketchModeDisplay.innerText = 'Off'
+    }
 }
 
 function changeSize(value) {
@@ -147,4 +156,5 @@ window.onload = () => {
     setCurrentMode(defaultMode)
     updateSizeValue(defaultSize)
     updateColorValue(defaultColor)
+    updateSketchModeDisplay()
 }
